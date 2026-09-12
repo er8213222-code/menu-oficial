@@ -1,0 +1,614 @@
+<!DOCTYPE html>  <html lang="es">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>El Taconazo</title>  <style>  
+*{  
+  box-sizing:border-box;  
+  margin:0;  
+  padding:0;  
+}  
+  
+html{  
+  scroll-behavior:smooth;  
+}  
+  
+body{  
+  background:#080808;  
+  color:#fff;  
+  font-family:Arial,Helvetica,sans-serif;  
+  overflow-x:hidden;  
+}  
+  
+.hero{  
+  min-height:100vh;  
+  position:relative;  
+  display:flex;  
+  align-items:center;  
+  justify-content:center;  
+  text-align:center;  
+  overflow:hidden;  
+  background:  
+    radial-gradient(circle at 50% 40%,#252525 0%,#101010 35%,#050505 80%);  
+}  
+  
+.hero:before{  
+  content:"";  
+  position:absolute;  
+  inset:-20%;  
+  background:  
+    radial-gradient(circle at 20% 30%,rgba(224,0,0,.14),transparent 25%),  
+    radial-gradient(circle at 80% 70%,rgba(244,196,0,.08),transparent 25%);  
+  animation:movimiento 10s ease-in-out infinite alternate;  
+}  
+  
+.hero:after{  
+  content:"";  
+  position:absolute;  
+  inset:0;  
+  background:linear-gradient(  
+    180deg,  
+    rgba(0,0,0,.25),  
+    rgba(8,8,8,.1) 45%,  
+    #080808 100%  
+  );  
+}  
+  
+.studio{  
+  position:absolute;  
+  top:22px;  
+  left:22px;  
+  z-index:3;  
+  color:#f4c400;  
+  font-size:12px;  
+  font-weight:800;  
+  letter-spacing:3px;  
+}  
+  
+.heroText{  
+  position:relative;  
+  z-index:2;  
+  padding:25px;  
+  animation:entrada 1.2s ease;  
+}  
+  
+.small{  
+  color:#f4c400;  
+  font-weight:bold;  
+  letter-spacing:5px;  
+  font-size:12px;  
+  margin-bottom:20px;  
+  animation:flotar 3s ease-in-out infinite;  
+}  
+  
+h1{  
+  font-size:clamp(58px,16vw,150px);  
+  line-height:.82;  
+  letter-spacing:-6px;  
+  font-weight:1000;  
+  text-shadow:0 10px 40px #000;  
+}  
+  
+.red{  
+  color:#e00000;  
+}  
+  
+.subtitle{  
+  margin-top:28px;  
+  font-size:clamp(22px,5vw,42px);  
+  font-weight:900;  
+  letter-spacing:1px;  
+}  
+  
+.down{  
+  display:inline-block;  
+  margin-top:45px;  
+  color:#f4c400;  
+  font-size:12px;  
+  letter-spacing:4px;  
+  text-decoration:none;  
+}  
+  
+section{  
+  max-width:1050px;  
+  margin:auto;  
+  padding:85px 22px;  
+}  
+  
+.label{  
+  color:#f4c400;  
+  font-size:12px;  
+  letter-spacing:4px;  
+  font-weight:bold;  
+  margin-bottom:12px;  
+}  
+  
+h2{  
+  font-size:clamp(40px,9vw,82px);  
+  line-height:.9;  
+  margin-bottom:35px;  
+}  
+  
+.menu{  
+  display:grid;  
+  grid-template-columns:repeat(2,1fr);  
+  gap:16px;  
+}  
+  
+.item{  
+  border:1px solid #292929;  
+  background:linear-gradient(145deg,#171717,#0c0c0c);  
+  border-radius:18px;  
+  padding:25px 22px;  
+  position:relative;  
+  overflow:hidden;  
+  transition:.35s;  
+  animation:aparecer .8s both;  
+}  
+  
+.item:nth-child(2){animation-delay:.08s}  
+.item:nth-child(3){animation-delay:.16s}  
+.item:nth-child(4){animation-delay:.24s}  
+.item:nth-child(5){animation-delay:.32s}  
+.item:nth-child(6){animation-delay:.40s}  
+  
+.item:before{  
+  content:"";  
+  position:absolute;  
+  left:0;  
+  top:0;  
+  width:5px;  
+  height:100%;  
+  background:#e00000;  
+}  
+  
+.item:hover{  
+  transform:translateX(8px) scale(1.02);  
+  border-color:#e00000;  
+}  
+  
+.item span{  
+  font-size:11px;  
+  color:#777;  
+  letter-spacing:3px;  
+}  
+  
+.item h3{  
+  margin-top:8px;  
+  font-size:27px;  
+  letter-spacing:1px;  
+}  
+  
+.item p{  
+  margin:8px 0;  
+  color:#bdbdbd;  
+  font-size:14px;  
+  line-height:1.3;  
+}  
+  
+.item p b{  
+  float:right;  
+  color:#f4c400;  
+  font-size:15px;  
+}  
+  
+.tripa-top{  
+  margin:0 auto 28px;  
+  padding:12px 16px;  
+  width:fit-content;  
+  max-width:100%;  
+  border:1px solid #f4c400;  
+  border-radius:12px;  
+  color:#f4c400;  
+  background:rgba(244,196,0,.06);  
+  font-size:12px;  
+  font-weight:900;  
+  letter-spacing:1.5px;  
+  text-align:center;  
+  animation:flotar 3s ease-in-out infinite;  
+}  
+  
+.taco-head,  
+.taco-row{  
+  display:grid;  
+  grid-template-columns:1fr 70px 70px;  
+  gap:8px;  
+  align-items:center;  
+}  
+  
+.taco-head{  
+  margin:16px 0 7px;  
+  padding:9px 0;  
+  border-top:1px solid #333;  
+  border-bottom:1px solid #333;  
+  color:#f4c400;  
+  font-size:10px;  
+  letter-spacing:1.5px;  
+}  
+  
+.taco-row{  
+  padding:8px 0;  
+  border-bottom:1px solid #222;  
+  font-size:14px;  
+  color:#bbb;  
+}  
+  
+.taco-row b{  
+  text-align:right;  
+  color:#f4c400;  
+  font-size:15px;  
+}  
+  
+.locations{  
+  margin-top:20px;  
+  display:grid;  
+  grid-template-columns:repeat(2,1fr);  
+  gap:18px;  
+}  
+  
+.location{  
+  padding:25px;  
+  border-radius:18px;  
+  border:1px solid #292929;  
+  background:#111;  
+  transition:.3s;  
+}  
+  
+.location:hover{  
+  border-color:#f4c400;  
+  transform:translateY(-4px);  
+}  
+  
+.location h3{  
+  font-size:22px;  
+  margin-bottom:12px;  
+}  
+  
+.location p{  
+  color:#aaa;  
+  line-height:1.5;  
+  margin-bottom:18px;  
+}  
+  
+.btn{  
+  display:inline-block;  
+  background:#f4c400;  
+  color:#111;  
+  font-weight:900;  
+  padding:12px 16px;  
+  border-radius:10px;  
+  font-size:12px;  
+  text-decoration:none;  
+}  
+  
+footer{  
+  background:#050505;  
+  text-align:center;  
+  padding:40px 20px;  
+}  
+  
+footer strong{  
+  color:#f4c400;  
+  letter-spacing:4px;  
+  font-size:12px;  
+}  
+  
+footer p{  
+  color:#555;  
+  font-size:11px;  
+  margin-top:10px;  
+}  
+  
+#soundBtn{  
+  position:fixed !important;  
+  right:18px;  
+  bottom:18px;  
+  z-index:9999;  
+  display:flex;  
+  align-items:center;  
+  justify-content:center;  
+  min-width:130px;  
+  padding:13px 18px;  
+  border:1px solid rgba(244,196,0,.75);  
+  border-radius:999px;  
+  background:rgba(12,12,12,.92);  
+  color:#f4c400;  
+  font-weight:800;  
+  font-size:12px;  
+  letter-spacing:1px;  
+  box-shadow:0 8px 25px rgba(0,0,0,.45);  
+  backdrop-filter:blur(8px);  
+  -webkit-backdrop-filter:blur(8px);  
+  cursor:pointer;  
+  animation:audioPulse 2.2s ease-in-out infinite;  
+}  
+  
+@keyframes entrada{  
+  from{opacity:0;transform:translateY(30px)}  
+  to{opacity:1;transform:none}  
+}  
+  
+@keyframes flotar{  
+  0%,100%{transform:translateY(0)}  
+  50%{transform:translateY(-5px)}  
+}  
+  
+@keyframes aparecer{  
+  from{opacity:0;transform:translateY(25px)}  
+  to{opacity:1;transform:none}  
+}  
+  
+@keyframes movimiento{  
+  0%{transform:translate(0,0) scale(1)}  
+  100%{transform:translate(4%,-3%) scale(1.08)}  
+}  
+  
+@keyframes audioPulse{  
+  0%,100%{  
+    transform:scale(1);  
+    box-shadow:0 8px 25px rgba(0,0,0,.45);  
+  }  
+  50%{  
+    transform:scale(1.04);  
+    box-shadow:0 8px 30px rgba(244,196,0,.18);  
+  }  
+}  
+  
+@media(max-width:650px){  
+  
+  .menu,  
+  .locations{  
+    grid-template-columns:1fr;  
+  }  
+  
+  h1{  
+    letter-spacing:-3px;  
+  }  
+  
+  .studio{  
+    left:16px;  
+    top:18px;  
+  }  
+  
+  .taco-head,  
+  .taco-row{  
+    grid-template-columns:1fr 58px 65px;  
+  }  
+  
+  #soundBtn{  
+    right:14px;  
+    bottom:14px;  
+    min-width:120px;  
+    padding:12px 15px;  
+    font-size:11px;  
+  }  
+}  
+</style>  </head>  <body>  <div class="hero">    <div class="studio">EMILIANO STUDIOS</div>    <div class="heroText">  <div class="small">SABOR QUE SE HEREDA</div>  
+
+<h1>  
+  EL<br>  
+  <span class="red">TACONAZO</span>  
+</h1>  
+
+<div class="subtitle">  
+  ¿QUÉ QUIERES PROBAR HOY?  
+</div>  
+
+<a href="#menu" class="down" id="menuBtn">  
+  VER MENÚ ↓  
+</a>
+
+  </div>  
+</div>  <section id="menu">    <div class="label">MENÚ</div>    <h2>  
+    LO BUENO<br>  
+    EMPIEZA AQUÍ.  
+  </h2>    <div class="tripa-top">  
+    TRIPA: SOLO SÁBADOS Y DOMINGOS  
+  </div>    <div class="menu">  <div class="item taco-item">  
+  <span>01 · TACOS</span>  
+  <h3>TACOS</h3>  
+
+  <div class="taco-head">  
+    <b>CARNE</b>  
+    <b>MAÍZ</b>  
+    <b>HARINA</b>  
+  </div>  
+
+  <div class="taco-row">  
+    <span>Pastor</span>  
+    <b>$17</b>  
+    <b>$18</b>  
+  </div>  
+
+  <div class="taco-row">  
+    <span>Birria de res</span>  
+    <b>$17</b>  
+    <b>$18</b>  
+  </div>  
+
+  <div class="taco-row">  
+    <span>Chorizo</span>  
+    <b>$17</b>  
+    <b>$18</b>  
+  </div>  
+
+  <div class="taco-row">  
+    <span>Bistec</span>  
+    <b>$17</b>  
+    <b>$18</b>  
+  </div>  
+
+  <div class="taco-row">  
+    <span>Tripa</span>  
+    <b>$18</b>  
+    <b>$19</b>  
+  </div>  
+</div>  
+<div class="item">  
+  <span>02 · TOSTADAS</span>  
+  <h3>TOSTADA</h3>  
+  <p>Pastor <b>$20</b></p>  
+  <p>Birria de res <b>$20</b></p>  
+  <p>Chorizo <b>$20</b></p>  
+  <p>Bistec <b>$20</b></p>  
+  <p>Tripa <b>$22</b></p>  
+</div>  
+
+<div class="item">  
+  <span>03 · VOLCÁN</span>  
+  <h3>VOLCÁN</h3>  
+  <p>Pastor <b>$22</b></p>  
+  <p>Birria de res <b>$22</b></p>  
+  <p>Chorizo <b>$22</b></p>  
+  <p>Bistec <b>$22</b></p>  
+  <p>Tripa <b>$24</b></p>  
+</div>  
+
+<div class="item">  
+  <span>04 · MULITA</span>  
+  <h3>MULITA</h3>  
+  <p>Pastor <b>$24</b></p>  
+  <p>Birria de res <b>$24</b></p>  
+  <p>Chorizo <b>$24</b></p>  
+  <p>Bistec <b>$24</b></p>  
+  <p>Tripa <b>$26</b></p>  
+</div>  
+
+<div class="item">  
+  <span>05 · BURRITO</span>  
+  <h3>BURRITO</h3>  
+  <p>Pastor <b>$37</b></p>  
+  <p>Birria de res <b>$37</b></p>  
+  <p>Chorizo <b>$37</b></p>  
+  <p>Bistec <b>$37</b></p>  
+  <p>Tripa <b>$39</b></p>  
+</div>  
+
+<div class="item">  
+  <span>06 · EMPALMADA</span>  
+  <h3>EMPALMADA</h3>  
+  <p>Pastor <b>$45</b></p>  
+  <p>Birria de res <b>$45</b></p>  
+  <p>Chorizo <b>$45</b></p>  
+  <p>Bistec <b>$45</b></p>  
+  <p>Tripa <b>$47</b></p>  
+</div>  
+
+<div class="item">  
+  <span>07 · GRINGA</span>  
+  <h3>GRINGA</h3>  
+  <p>Pastor <b>$45</b></p>  
+  <p>Birria de res <b>$45</b></p>  
+  <p>Chorizo <b>$45</b></p>  
+  <p>Bistec <b>$45</b></p>  
+  <p>Tripa <b>$47</b></p>  
+</div>  
+
+<div class="item">  
+  <span>08 · QUESADILLA</span>  
+  <h3>QUESADILLA</h3>  
+  <p>Pastor <b>$40</b></p>  
+  <p>Birria de res <b>$40</b></p>  
+  <p>Chorizo <b>$40</b></p>  
+  <p>Bistec <b>$40</b></p>  
+  <p>Tripa <b>$45</b></p>  
+  <p>Quesabirria <b>$45</b></p>  
+</div>  
+
+<div class="item">  
+  <span>09 · TORTA</span>  
+  <h3>TORTA</h3>  
+  <p>Pastor <b>$45</b></p>  
+  <p>Birria de res <b>$45</b></p>  
+  <p>Chorizo <b>$45</b></p>  
+  <p>Bistec <b>$45</b></p>  
+  <p>Tripa <b>$50</b></p>  
+</div>  
+
+<div class="item">  
+  <span>10 · BEBIDAS</span>  
+  <h3>BEBIDAS</h3>  
+  <p>Refresco de vidrio <b>$30</b></p>  
+  <p>Refresco taparrosca 600 ml <b>$35</b></p>  
+  <p>Jamaica chica <b>$20</b></p>  
+  <p>Jamaica grande <b>$30</b></p>  
+  <p>Horchata chica <b>$20</b></p>  
+  <p>Horchata grande <b>$30</b></p>  
+  <p>Café <b>$25</b></p>  
+  <p>Té <b>$20</b></p>  
+  <p>Consomé <b>$10</b></p>  
+  <p>Cerveza <b>$35</b></p>  
+  <p>Corona (clara/oscura)</p>  
+  <p>Victoria</p>  
+</div>
+
+  </div>  
+</section>  <section>    <div class="label">ENCUÉNTRANOS</div>    <h2>  
+    CAE POR<br>  
+    UNOS TACOS.  
+  </h2>    <div class="locations">  <div class="location">  
+  <h3>EL TACONAZO</h3>  
+  <p>  
+    Ven a disfrutar nuestros tacos  
+    y especialidades.  
+  </p>  
+  <a  
+    class="btn"  
+    href="https://maps.app.goo.gl/rxNcuHQQVn3jn7Rb6?g_st=aw"  
+    target="_blank">  
+    VER UBICACIÓN  
+  </a>  
+</div>  
+
+<div class="location">  
+  <h3>EL TACONAZO · EL TOMBERO</h3>  
+  <p>  
+    También puedes encontrarnos  
+    en El Tombero.  
+  </p>  
+  <a  
+    class="btn"  
+    href="https://maps.app.goo.gl/ictFb4bgkbTwJkZJ7?g_st=aw"  
+    target="_blank">  
+    VER UBICACIÓN  
+  </a>  
+</div>
+
+  </div>  </section>  <footer>  
+  <strong>EL TACONAZO</strong>  
+  <p>EMILIANO STUDIOS</p>  
+</footer>  <button id="soundBtn" type="button">  
+  ♫ AUDIO  
+</button>  
+<script>  
+const tacoAudio = new Audio("audio.mp4");  tacoAudio.loop = true;
+tacoAudio.volume = 0.55;
+
+const soundBtn = document.getElementById("soundBtn");
+const menuBtn = document.getElementById("menuBtn");
+
+menuBtn.addEventListener("click", () => {
+tacoAudio.play().catch(() => {});
+soundBtn.textContent = "♫ APAGAR AUDIO";
+});
+
+soundBtn.addEventListener("click", () => {
+
+if (tacoAudio.paused) {
+
+tacoAudio.play().catch(() => {});  
+soundBtn.textContent = "♫ APAGAR AUDIO";
+
+} else {
+
+tacoAudio.pause();  
+tacoAudio.currentTime = 0;  
+soundBtn.textContent = "♫ AUDIO";
+
+}
+
+});
+</script>
+
+</body>  
+</html>
