@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>EL TACONAZO</title>
 
     <style>
@@ -24,8 +23,6 @@
             overflow-x: hidden;
         }
 
-        /* VIDEO DE FONDO */
-
         .background-video {
             position: fixed;
             inset: 0;
@@ -42,8 +39,6 @@
             z-index: -1;
             pointer-events: none;
         }
-
-        /* PORTADA */
 
         .hero {
             min-height: 100vh;
@@ -90,18 +85,12 @@
             font-weight: bold;
             cursor: pointer;
             box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-            transition: transform 0.2s, background 0.2s;
-        }
-
-        .menu-button:hover {
-            transform: scale(1.05);
+            transition: transform 0.2s;
         }
 
         .menu-button:active {
             transform: scale(0.97);
         }
-
-        /* MENU */
 
         #menu {
             width: 100%;
@@ -162,10 +151,6 @@
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        .item:last-child {
-            border-bottom: none;
-        }
-
         .item-name {
             font-size: 17px;
         }
@@ -181,8 +166,6 @@
             opacity: 0.65;
             margin-top: 4px;
         }
-
-        /* UBICACIONES */
 
         .location-card {
             background: rgba(255,255,255,0.07);
@@ -216,8 +199,6 @@
             font-weight: bold;
         }
 
-        /* PIE */
-
         .footer {
             text-align: center;
             padding: 30px 20px 50px;
@@ -227,11 +208,6 @@
         }
 
         @media (max-width: 600px) {
-
-            .hero {
-                padding: 25px 15px;
-            }
-
             .logo {
                 width: 160px;
             }
@@ -303,243 +279,155 @@
     <main id="menu">
 
         <div class="menu-header">
-
-            <h2>
-                MENÚ
-            </h2>
+            <h2>MENÚ</h2>
 
             <div class="creator-small">
                 EMILIANO STUDIOS
             </div>
-
         </div>
 
 
         <!-- TACOS -->
 
         <div class="menu-section">
+            <h3 class="section-title">TACOS</h3>
 
-            <h3 class="section-title">
-                TACOS
-            </h3>
-
-            <div class="item">
-                <div class="item-name">Pastor</div>
-                <div class="item-price">$17 / $18</div>
-            </div>
-
-            <div class="item">
-                <div class="item-name">Birria</div>
-                <div class="item-price">$17 / $18</div>
-            </div>
-
-            <div class="item">
-                <div class="item-name">Chorizo</div>
-                <div class="item-price">$17 / $18</div>
-            </div>
-
-            <div class="item">
-                <div class="item-name">Bistec</div>
-                <div class="item-price">$17 / $18</div>
-            </div>
-
-            <div class="item">
-                <div class="item-name">Tripa</div>
-                <div class="item-price">$18 / $19</div>
-            </div>
+            <div class="item"><div class="item-name">Pastor</div><div class="item-price">$17 / $18</div></div>
+            <div class="item"><div class="item-name">Birria</div><div class="item-price">$17 / $18</div></div>
+            <div class="item"><div class="item-name">Chorizo</div><div class="item-price">$17 / $18</div></div>
+            <div class="item"><div class="item-name">Bistec</div><div class="item-price">$17 / $18</div></div>
+            <div class="item"><div class="item-name">Tripa</div><div class="item-price">$18 / $19</div></div>
 
             <div class="variants">
                 Precio: maíz / harina
             </div>
-
         </div>
 
 
         <!-- TOSTADAS -->
 
         <div class="menu-section">
+            <h3 class="section-title">TOSTADAS</h3>
 
-            <h3 class="section-title">
-                TOSTADAS
-            </h3>
-
-            <div class="item">
-                <div class="item-name">Pastor</div>
-                <div class="item-price">$20</div>
-            </div>
-
-            <div class="item">
-                <div class="item-name">Birria</div>
-                <div class="item-price">$20</div>
-            </div>
-
-            <div class="item">
-                <div class="item-name">Chorizo</div>
-                <div class="item-price">$20</div>
-            </div>
-
-            <div class="item">
-                <div class="item-name">Bistec</div>
-                <div class="item-price">$20</div>
-            </div>
-
-            <div class="item">
-                <div class="item-name">Tripa</div>
-                <div class="item-price">$22</div>
-            </div>
-
+            <div class="item"><div class="item-name">Pastor</div><div class="item-price">$20</div></div>
+            <div class="item"><div class="item-name">Birria</div><div class="item-price">$20</div></div>
+            <div class="item"><div class="item-name">Chorizo</div><div class="item-price">$20</div></div>
+            <div class="item"><div class="item-name">Bistec</div><div class="item-price">$20</div></div>
+            <div class="item"><div class="item-name">Tripa</div><div class="item-price">$22</div></div>
         </div>
 
 
         <!-- VOLCANES -->
 
         <div class="menu-section">
-
-            <h3 class="section-title">
-                VOLCANES
-            </h3>
+            <h3 class="section-title">VOLCANES</h3>
 
             <div class="item"><div class="item-name">Pastor</div><div class="item-price">$22</div></div>
             <div class="item"><div class="item-name">Birria</div><div class="item-price">$22</div></div>
             <div class="item"><div class="item-name">Chorizo</div><div class="item-price">$22</div></div>
             <div class="item"><div class="item-name">Bistec</div><div class="item-price">$22</div></div>
             <div class="item"><div class="item-name">Tripa</div><div class="item-price">$24</div></div>
-
         </div>
 
 
         <!-- MULITAS -->
 
         <div class="menu-section">
-
-            <h3 class="section-title">
-                MULITAS
-            </h3>
+            <h3 class="section-title">MULITAS</h3>
 
             <div class="item"><div class="item-name">Pastor</div><div class="item-price">$24</div></div>
             <div class="item"><div class="item-name">Birria</div><div class="item-price">$24</div></div>
             <div class="item"><div class="item-name">Chorizo</div><div class="item-price">$24</div></div>
             <div class="item"><div class="item-name">Bistec</div><div class="item-price">$24</div></div>
             <div class="item"><div class="item-name">Tripa</div><div class="item-price">$26</div></div>
-
         </div>
 
 
         <!-- BURRITOS -->
 
         <div class="menu-section">
-
-            <h3 class="section-title">
-                BURRITOS
-            </h3>
+            <h3 class="section-title">BURRITOS</h3>
 
             <div class="item"><div class="item-name">Pastor</div><div class="item-price">$37</div></div>
             <div class="item"><div class="item-name">Birria</div><div class="item-price">$37</div></div>
             <div class="item"><div class="item-name">Chorizo</div><div class="item-price">$37</div></div>
             <div class="item"><div class="item-name">Bistec</div><div class="item-price">$37</div></div>
             <div class="item"><div class="item-name">Tripa</div><div class="item-price">$39</div></div>
-
         </div>
 
 
         <!-- EMPALMADAS -->
 
         <div class="menu-section">
-
-            <h3 class="section-title">
-                EMPALMADAS
-            </h3>
+            <h3 class="section-title">EMPALMADAS</h3>
 
             <div class="item"><div class="item-name">Pastor</div><div class="item-price">$45</div></div>
             <div class="item"><div class="item-name">Birria</div><div class="item-price">$45</div></div>
             <div class="item"><div class="item-name">Chorizo</div><div class="item-price">$45</div></div>
             <div class="item"><div class="item-name">Bistec</div><div class="item-price">$45</div></div>
             <div class="item"><div class="item-name">Tripa</div><div class="item-price">$47</div></div>
-
         </div>
 
 
         <!-- GRINGAS -->
 
         <div class="menu-section">
-
-            <h3 class="section-title">
-                GRINGAS
-            </h3>
+            <h3 class="section-title">GRINGAS</h3>
 
             <div class="item"><div class="item-name">Pastor</div><div class="item-price">$45</div></div>
             <div class="item"><div class="item-name">Birria</div><div class="item-price">$45</div></div>
             <div class="item"><div class="item-name">Chorizo</div><div class="item-price">$45</div></div>
             <div class="item"><div class="item-name">Bistec</div><div class="item-price">$45</div></div>
             <div class="item"><div class="item-name">Tripa</div><div class="item-price">$47</div></div>
-
         </div>
 
 
         <!-- QUESADILLAS -->
 
         <div class="menu-section">
-
-            <h3 class="section-title">
-                QUESADILLAS
-            </h3>
+            <h3 class="section-title">QUESADILLAS</h3>
 
             <div class="item"><div class="item-name">Pastor</div><div class="item-price">$40</div></div>
             <div class="item"><div class="item-name">Birria</div><div class="item-price">$40</div></div>
             <div class="item"><div class="item-name">Chorizo</div><div class="item-price">$40</div></div>
             <div class="item"><div class="item-name">Bistec</div><div class="item-price">$40</div></div>
             <div class="item"><div class="item-name">Tripa</div><div class="item-price">$45</div></div>
-
         </div>
 
 
         <!-- QUESABIRRIA -->
 
         <div class="menu-section">
-
-            <h3 class="section-title">
-                QUESABIRRIA
-            </h3>
+            <h3 class="section-title">QUESABIRRIA</h3>
 
             <div class="item">
                 <div class="item-name">Quesabirria</div>
                 <div class="item-price">$45</div>
             </div>
-
         </div>
 
 
         <!-- TORTAS -->
 
         <div class="menu-section">
-
-            <h3 class="section-title">
-                TORTAS
-            </h3>
+            <h3 class="section-title">TORTAS</h3>
 
             <div class="item"><div class="item-name">Pastor</div><div class="item-price">$45</div></div>
             <div class="item"><div class="item-name">Birria</div><div class="item-price">$45</div></div>
             <div class="item"><div class="item-name">Chorizo</div><div class="item-price">$45</div></div>
             <div class="item"><div class="item-name">Bistec</div><div class="item-price">$45</div></div>
             <div class="item"><div class="item-name">Tripa</div><div class="item-price">$50</div></div>
-
         </div>
 
 
         <!-- BOTANAS -->
 
         <div class="menu-section">
-
-            <h3 class="section-title">
-                BOTANAS
-            </h3>
+            <h3 class="section-title">BOTANAS</h3>
 
             <div class="item">
-                <div class="item-name">
-                    Patitas de puerco
-                </div>
+                <div class="item-name">Patitas de puerco</div>
             </div>
-
         </div>
 
 
@@ -547,133 +435,56 @@
 
         <div class="menu-section">
 
-            <h3 class="section-title">
-                BEBIDAS
-            </h3>
+            <h3 class="section-title">BEBIDAS</h3>
+
+            <h4 class="subsection-title">REFRESCOS</h4>
+
+            <div class="item"><div class="item-name">Coca-Cola de vidrio 355 ml</div><div class="item-price">$30</div></div>
+            <div class="item"><div class="item-name">Coca-Cola 600 ml</div><div class="item-price">$35</div></div>
+            <div class="item"><div class="item-name">Fresca de vidrio</div><div class="item-price">$30</div></div>
+            <div class="item"><div class="item-name">Squirt de vidrio</div><div class="item-price">$30</div></div>
+            <div class="item"><div class="item-name">Mundet de vidrio</div><div class="item-price">$30</div></div>
+            <div class="item"><div class="item-name">Agua mineral de vidrio</div><div class="item-price">$30</div></div>
+            <div class="item"><div class="item-name">Topo Chico</div><div class="item-price">$35</div></div>
 
 
-            <h4 class="subsection-title">
-                REFRESCOS
-            </h4>
+            <h4 class="subsection-title">AGUAS FRESCAS</h4>
 
-            <div class="item">
-                <div class="item-name">Coca-Cola de vidrio 355 ml</div>
-                <div class="item-price">$30</div>
-            </div>
-
-            <div class="item">
-                <div class="item-name">Coca-Cola 600 ml</div>
-                <div class="item-price">$35</div>
-            </div>
-
-            <div class="item">
-                <div class="item-name">Fresca de vidrio</div>
-                <div class="item-price">$30</div>
-            </div>
-
-            <div class="item">
-                <div class="item-name">Squirt de vidrio</div>
-                <div class="item-price">$30</div>
-            </div>
-
-            <div class="item">
-                <div class="item-name">Mundet de vidrio</div>
-                <div class="item-price">$30</div>
-            </div>
-
-            <div class="item">
-                <div class="item-name">Agua mineral de vidrio</div>
-                <div class="item-price">$30</div>
-            </div>
-
-            <div class="item">
-                <div class="item-name">Topo Chico</div>
-                <div class="item-price">$35</div>
-            </div>
+            <div class="item"><div class="item-name">Agua de Jamaica chica</div><div class="item-price">$20</div></div>
+            <div class="item"><div class="item-name">Agua de Jamaica mediana</div><div class="item-price">$25</div></div>
+            <div class="item"><div class="item-name">Agua de Horchata chica</div><div class="item-price">$20</div></div>
+            <div class="item"><div class="item-name">Agua de Horchata mediana</div><div class="item-price">$25</div></div>
+            <div class="item"><div class="item-name">Agua de Pepino chica</div><div class="item-price">$20</div></div>
+            <div class="item"><div class="item-name">Agua de Pepino mediana</div><div class="item-price">$25</div></div>
 
 
-            <h4 class="subsection-title">
-                AGUAS FRESCAS
-            </h4>
-
-            <div class="item">
-                <div class="item-name">Agua de Jamaica chica</div>
-                <div class="item-price">$20</div>
-            </div>
-
-            <div class="item">
-                <div class="item-name">Agua de Jamaica mediana</div>
-                <div class="item-price">$25</div>
-            </div>
-
-            <div class="item">
-                <div class="item-name">Agua de Horchata chica</div>
-                <div class="item-price">$20</div>
-            </div>
-
-            <div class="item">
-                <div class="item-name">Agua de Horchata mediana</div>
-                <div class="item-price">$25</div>
-            </div>
-
-            <div class="item">
-                <div class="item-name">Agua de Pepino chica</div>
-                <div class="item-price">$20</div>
-            </div>
-
-            <div class="item">
-                <div class="item-name">Agua de Pepino mediana</div>
-                <div class="item-price">$25</div>
-            </div>
+            <div class="item"><div class="item-name">Agua natural</div><div class="item-price">$15</div></div>
+            <div class="item"><div class="item-name">Café</div><div class="item-price">$25</div></div>
 
 
-            <div class="item">
-                <div class="item-name">Agua natural</div>
-                <div class="item-price">$15</div>
-            </div>
+            <h4 class="subsection-title">ESPECIALES</h4>
 
-            <div class="item">
-                <div class="item-name">Café</div>
-                <div class="item-price">$25</div>
-            </div>
-
-
-            <h4 class="subsection-title">
-                ESPECIALES
-            </h4>
-
-            <div class="item">
-                <div class="item-name">Cerveza</div>
-                <div class="item-price">$35</div>
-            </div>
+            <div class="item"><div class="item-name">Cerveza</div><div class="item-price">$35</div></div>
 
             <div class="variants">
                 Oscura / Blanca
             </div>
 
-            <div class="item">
-                <div class="item-name">Victoria</div>
-                <div class="item-price">$35</div>
-            </div>
-
-            <div class="item">
-                <div class="item-name">Corona 0</div>
-                <div class="item-price">$35</div>
-            </div>
+            <div class="item"><div class="item-name">Victoria</div><div class="item-price">$35</div></div>
+            <div class="item"><div class="item-name">Corona 0</div><div class="item-price">$35</div></div>
 
         </div>
 
 
         <!-- UBICACIONES -->
 
-        <div class="menu-section locations">
+        <div class="menu-section">
 
             <h3 class="section-title">
                 UBICACIONES
             </h3>
 
-
-            <!-- PRINCIPAL -->
+            <!-- EL TACONAZO -->
 
             <div class="location-card">
 
@@ -698,7 +509,7 @@
             </div>
 
 
-            <!-- SECUNDARIA -->
+            <!-- EL TACONAZO EL TOMBERO -->
 
             <div class="location-card">
 
@@ -732,7 +543,7 @@
     </footer>
 
 
-    <!-- AUDIO -->
+    <!-- AUDIO: NO AUTOPLAY -->
 
     <audio id="menuAudio" preload="auto">
         <source src="audio.mp3" type="audio/mpeg">
@@ -748,31 +559,20 @@
             audio.loop = true;
             audio.currentTime = 0;
 
-            const reproduccion = audio.play();
-
-            if (reproduccion !== undefined) {
-
-                reproduccion.catch(function(error) {
-
-                    console.log(
-                        "El navegador bloqueó el audio:",
-                        error
-                    );
-
-                });
-
-            }
-
-            document.getElementById("menu").scrollIntoView({
-
-                behavior: "smooth",
-                block: "start"
-
+            // El audio comienza por la acción directa
+            // del usuario al pulsar VER MENÚ.
+            audio.play().catch(function(error) {
+                console.log("No se pudo reproducir el audio:", error);
             });
 
+            // Baja al menú suavemente.
+            document.getElementById("menu").scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
         }
 
     </script>
 
 </body>
-</html>
+                </html>
