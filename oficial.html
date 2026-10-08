@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EL TACONAZO</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #111;
+            color: white;
+        }
+
+        /* =========================
+           PORTADA
+        ========================= */
+
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            min-height: 650px;
+            overflow: hidden;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(
+                    to bottom,
+                    rgba(0,0,0,0.55),
+                    rgba(0,0,0,0.35),
+                    rgba(0,0,0,0.78)
+                );
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .logo {
+            width: 180px;
+            max-width: 55vw;
+            height: auto;
+            display: block;
+            margin: 0 auto 25px;
+            object-fit: contain;
+        }
+
+        .title {
+            font-size: clamp(45px, 12vw, 85px);
+            font-weight: 900;
+            letter-spacing: 5px;
+            line-height: 0.95;
+            text-shadow:
+                0 4px 12px rgba(0,0,0,0.9),
+                0 0 25px rgba(0,0,0,0.7);
+        }
+
+        .menu-button {
+            margin-top: 35px;
+            padding: 17px 42px;
+
+            border: 2px solid white;
+            border-radius: 50px;
+
+            background: rgba(0,0,0,0.55);
+            color: white;
+
+            font-size: 17px;
+            font-weight: bold;
+            letter-spacing: 2px;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.25s ease,
+                background 0.25s ease;
+        }
+
+        .menu-button:hover {
+            transform: scale(1.05);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .studio-top {
+            margin-top: 28px;
+            font-size: 11px;
+            letter-spacing: 4px;
+            opacity: 0.65;
+        }
+
+        /* =========================
+           MENÚ
+        ========================= */
+
+        #menu {
+            background:
+                radial-gradient(
+                    circle at top,
+                    #292929,
+                    #111 65%
+                );
+
+            padding: 80px 18px;
+            min-height: 100vh;
+        }
+
+        .menu-container {
+            width: 100%;
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .menu-title {
+            text-align: center;
+            font-size: 48px;
+            font-weight: 900;
+            letter-spacing: 6px;
+            margin-bottom: 12px;
+        }
+
+        .studio {
+            text-align: center;
+            font-size: 10px;
+            letter-spacing: 4px;
+            opacity: 0.5;
+            margin-bottom: 50px;
+        }
+
+        .section {
+            margin-bottom: 45px;
+        }
+
+        .section-title {
+            font-size: 25px;
+            font-weight: 900;
+            letter-spacing: 3px;
+
+            border-bottom: 2px solid rgba(255,255,255,0.25);
+
+            padding-bottom: 10px;
+            margin-bottom: 18px;
+        }
+
+        .subsection {
+            font-size: 13px;
+            letter-spacing: 2px;
+            opacity: 0.65;
+            margin: 20px 0 10px;
+            text-transform: uppercase;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 15px;
+
+            padding: 9px 0;
+
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .item-name {
+            font-size: 16px;
+        }
+
+        .price {
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .description {
+            font-size: 12px;
+            opacity: 0.55;
+            margin-top: 2px;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        /* =========================
+           PIE
+        ========================= */
+
+        .footer {
+            text-align: center;
+            padding: 35px 20px 50px;
+
+            font-size: 11px;
+            letter-spacing: 3px;
+            opacity: 0.5;
+        }
+
+        /* =========================
+           AUDIO
+        ========================= */
+
+        #menuAudio {
+            display: none;
+        }
+
+        /* =========================
+           CELULAR
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .hero {
+                min-height: 600px;
+            }
+
+            .logo {
+                width: 145px;
+            }
+
+            .title {
+                font-size: 48px;
+                letter-spacing: 3px;
+            }
+
+            .menu-button {
+                padding: 15px 32px;
+                font-size: 15px;
+            }
+
+            #menu {
+                padding: 65px 16px;
+            }
+
+            .menu-title {
+                font-size: 38px;
+            }
+
+            .section-title {
+                font-size: 22px;
+            }
+
+            .item-name {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         PORTADA
+    ========================= -->
+
+    <section class="hero">
+
+        <video autoplay muted loop playsinline>
+            <source src="video.mp4" type="video/mp4">
+        </video>
+
+        <div class="overlay"></div>
+
+        <div class="hero-content">
+
+            <img
+                src="logo.jpg"
+                alt="Logo de EL TACONAZO"
+                class="logo"
+            >
+
+            <h1 class="title">
+                EL TACONAZO
+            </h1>
+
+            <button
+                class="menu-button"
+                onclick="abrirMenu()"
+            >
+                VER MENÚ
+            </button>
+
+            <div class="studio-top">
+                EMILIANO STUDIOS
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         AUDIO
+    ========================= -->
+
+    <audio id="menuAudio" preload="auto">
+        <source src="audio.mp3" type="audio/mpeg">
+    </audio>
+
+
+    <!-- =========================
+         MENÚ
+    ========================= -->
+
+    <section id="menu">
+
+        <div class="menu-container">
+
+            <h2 class="menu-title">
+                MENÚ
+            </h2>
+
+            <div class="studio">
+                EMILIANO STUDIOS
+            </div>
+
+
+            <!-- TACOS -->
+
+            <div class="section">
+
+                <h3 class="section-title">
+                    TACOS
+                </h3>
+
+                <div class="item">
+                    <div class="item-info">Pastor</div>
+                    <div class="price">$17 maíz / $18 harina</div>
+                </div>
+
+                <div class="item">
+                    <div class="item-info">Birria</div>
+                    <div class="price">$17 maíz / $18 harina</div>
+                </div>
+
+                <div class="item">
+                    <div class="item-info">Chorizo</div>
+                    <div class="price">$17 maíz / $18 harina</div>
+                </div>
+
+                <div class="item">
+                    <div class="item-info">Bistec</div>
+                    <div class="price">$17 maíz / $18 harina</div>
+                </div>
+
+                <div class="item">
+                    <div class="item-info">Tripa</div>
+                    <div class="price">$18 maíz / $19 harina</div>
+                </div>
+
+            </div>
+
+
+            <!-- TOSTADAS -->
+
+            <div class="section">
+
+                <h3 class="section-title">
+                    TOSTADAS
+                </h3>
+
+                <div class="item"><div class="item-info">Pastor</div><div class="price">$20</div></div>
+                <div class="item"><div class="item-info">Birria</div><div class="price">$20</div></div>
+                <div class="item"><div class="item-info">Chorizo</div><div class="price">$20</div></div>
+                <div class="item"><div class="item-info">Bistec</div><div class="price">$20</div></div>
+                <div class="item"><div class="item-info">Tripa</div><div class="price">$22</div></div>
+
+            </div>
+
+
+            <!-- VOLCANES -->
+
+            <div class="section">
+
+                <h3 class="section-title">
+                    VOLCANES
+                </h3>
+
+                <div class="item"><div class="item-info">Pastor</div><div class="price">$22</div></div>
+                <div class="item"><div class="item-info">Birria</div><div class="price">$22</div></div>
+                <div class="item"><div class="item-info">Chorizo</div><div class="price">$22</div></div>
+                <div class="item"><div class="item-info">Bistec</div><div class="price">$22</div></div>
+                <div class="item"><div class="item-info">Tripa</div><div class="price">$24</div></div>
+
+            </div>
+
+
+            <!-- MULITAS -->
+
+            <div class="section">
+
+                <h3 class="section-title">
+                    MULITAS
+                </h3>
+
+                <div class="item"><div class="item-info">Pastor</div><div class="price">$24</div></div>
+                <div class="item"><div class="item-info">Birria</div><div class="price">$24</div></div>
+                <div class="item"><div class="item-info">Chorizo</div><div class="price">$24</div></div>
+                <div class="item"><div class="item-info">Bistec</div><div class="price">$24</div></div>
+                <div class="item"><div class="item-info">Tripa</div><div class="price">$26</div></div>
+
+            </div>
+
+
+            <!-- BURRITOS -->
+
+            <div class="section">
+
+                <h3 class="section-title">
+                    BURRITOS
+                </h3>
+
+                <div class="item"><div class="item-info">Pastor</div><div class="price">$37</div></div>
+                <div class="item"><div class="item-info">Birria</div><div class="price">$37</div></div>
+                <div class="item"><div class="item-info">Chorizo</div><div class="price">$37</div></div>
+                <div class="item"><div class="item-info">Bistec</div><div class="price">$37</div></div>
+                <div class="item"><div class="item-info">Tripa</div><div class="price">$39</div></div>
+
+            </div>
+
+
+            <!-- EMPALMADAS -->
+
+            <div class="section">
+
+                <h3 class="section-title">
+                    EMPALMADAS
+                </h3>
+
+                <div class="item"><div class="item-info">Pastor</div><div class="price">$45</div></div>
+                <div class="item"><div class="item-info">Birria</div><div class="price">$45</div></div>
+                <div class="item"><div class="item-info">Chorizo</div><div class="price">$45</div></div>
+                <div class="item"><div class="item-info">Bistec</div><div class="price">$45</div></div>
+                <div class="item"><div class="item-info">Tripa</div><div class="price">$47</div></div>
+
+            </div>
+
+
+            <!-- GRINGAS -->
+
+            <div class="section">
+
+                <h3 class="section-title">
+                    GRINGAS
+                </h3>
+
+                <div class="item"><div class="item-info">Pastor</div><div class="price">$45</div></div>
+                <div class="item"><div class="item-info">Birria</div><div class="price">$45</div></div>
+                <div class="item"><div class="item-info">Chorizo</div><div class="price">$45</div></div>
+                <div class="item"><div class="item-info">Bistec</div><div class="price">$45</div></div>
+                <div class="item"><div class="item-info">Tripa</div><div class="price">$47</div></div>
+
+            </div>
+
+
+            <!-- QUESADILLAS -->
+
+            <div class="section">
+
+                <h3 class="section-title">
+                    QUESADILLAS
+                </h3>
+
+                <div class="item"><div class="item-info">Pastor</div><div class="price">$40</div></div>
+                <div class="item"><div class="item-info">Birria</div><div class="price">$40</div></div>
+                <div class="item"><div class="item-info">Chorizo</div><div class="price">$40</div></div>
+                <div class="item"><div class="item-info">Bistec</div><div class="price">$40</div></div>
+                <div class="item"><div class="item-info">Tripa</div><div class="price">$45</div></div>
+
+            </div>
+
+
+            <!-- QUESABIRRIA -->
+
+            <div class="section">
+
+                <h3 class="section-title">
+                    QUESABIRRIA
+                </h3>
+
+                <div class="item">
+                    <div class="item-info">Quesabirria</div>
+                    <div class="price">$45</div>
+                </div>
+
+            </div>
+
+
+            <!-- TORTAS -->
+
+            <div class="section">
+
+                <h3 class="section-title">
+                    TORTAS
+                </h3>
+
+                <div class="item"><div class="item-info">Pastor</div><div class="price">$45</div></div>
+                <div class="item"><div class="item-info">Birria</div><div class="price">$45</div></div>
+                <div class="item"><div class="item-info">Chorizo</div><div class="price">$45</div></div>
+                <div class="item"><div class="item-info">Bistec</div><div class="price">$45</div></div>
+                <div class="item"><div class="item-info">Tripa</div><div class="price">$50</div></div>
+
+            </div>
+
+
+            <!-- BOTANAS -->
+
+            <div class="section">
+
+                <h3 class="section-title">
+                    BOTANAS
+                </h3>
+
+                <div class="item">
+                    <div class="item-info">
+                        Patitas de puerco
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- BEBIDAS -->
+
+            <div class="section">
+
+                <h3 class="section-title">
+                    BEBIDAS
+                </h3>
+
+
+                <div class="subsection">
+                    Refrescos
+                </div>
+
+                <div class="item"><div class="item-info">Coca-Cola de vidrio 355 ml</div><div class="price">$30</div></div>
+                <div class="item"><div class="item-info">Coca-Cola 600 ml</div><div class="price">$35</div></div>
+                <div class="item"><div class="item-info">Fresca de vidrio</div><div class="price">$30</div></div>
+                <div class="item"><div class="item-info">Squirt de vidrio</div><div class="price">$30</div></div>
+                <div class="item"><div class="item-info">Mundet de vidrio</div><div class="price">$30</div></div>
+                <div class="item"><div class="item-info">Agua mineral de vidrio</div><div class="price">$30</div></div>
+                <div class="item"><div class="item-info">Topo Chico</div><div class="price">$35</div></div>
+
+
+                <div class="subsection">
+                    Aguas frescas
+                </div>
+
+                <div class="item"><div class="item-info">Agua de Jamaica chica</div><div class="price">$20</div></div>
+                <div class="item"><div class="item-info">Agua de Jamaica mediana</div><div class="price">$25</div></div>
+                <div class="item"><div class="item-info">Agua de Horchata chica</div><div class="price">$20</div></div>
+                <div class="item"><div class="item-info">Agua de Horchata mediana</div><div class="price">$25</div></div>
+                <div class="item"><div class="item-info">Agua de Pepino chica</div><div class="price">$20</div></div>
+                <div class="item"><div class="item-info">Agua de Pepino mediana</div><div class="price">$25</div></div>
+
+
+                <div class="item">
+                    <div class="item-info">Agua natural</div>
+                    <div class="price">$15</div>
+                </div>
+
+                <div class="item">
+                    <div class="item-info">Café</div>
+                    <div class="price">$25</div>
+                </div>
+
+
+                <div class="item">
+                    <div class="item-info">
+                        <div class="item-name">Cerveza</div>
+                        <div class="description">
+                            Oscura · Blanca
+                        </div>
+                    </div>
+                    <div class="price">$35</div>
+                </div>
+
+                <div class="item">
+                    <div class="item-info">Victoria</div>
+                    <div class="price">$35</div>
+                </div>
+
+                <div class="item">
+                    <div class="item-info">Corona 0</div>
+                    <div class="price">$35</div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PIE
+    ========================= -->
+
+    <footer class="footer">
+        EMILIANO STUDIOS
+        <br><br>
+        EL TACONAZO
+    </footer>
+
+
+    <script>
+
+        function abrirMenu() {
+
+            const audio =
+                document.getElementById("menuAudio");
+
+            audio.currentTime = 0;
+
+            audio.play().catch(function(error) {
+                console.log(
+                    "No se pudo reproducir el audio:",
+                    error
+                );
+            });
+
+            document
+                .getElementById("menu")
+                .scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+        }
+
+    </script>
+
+</body>
+                      </html>
