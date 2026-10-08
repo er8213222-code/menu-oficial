@@ -3,9 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>EL TACONAZO</title>
 
 <style>
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -23,98 +25,176 @@ body {
     overflow-x: hidden;
 }
 
-/* VIDEO DE FONDO */
+
+/* =========================
+   VIDEO DE FONDO
+========================= */
+
 .background-video {
     position: fixed;
     inset: 0;
+
     width: 100%;
     height: 100%;
+
     object-fit: cover;
+
     z-index: -2;
 }
 
 .background-overlay {
     position: fixed;
     inset: 0;
+
     background: rgba(0, 0, 0, 0.58);
+
     z-index: -1;
+
     pointer-events: none;
 }
 
-/* CONTENIDO */
+
+/* =========================
+   CONTENIDO
+========================= */
+
 .content {
     position: relative;
     z-index: 1;
 }
 
-/* PORTADA */
+
+/* =========================
+   PORTADA
+========================= */
+
 .hero {
     min-height: 100vh;
+
     display: flex;
     flex-direction: column;
+
     justify-content: center;
     align-items: center;
+
     text-align: center;
+
     padding: 30px 20px;
 }
+
+
+/* LOGO */
 
 .logo {
     width: 190px;
     max-width: 65vw;
+
     height: auto;
+
     display: block;
+
     margin: 0 auto 25px;
+
     object-fit: contain;
-    filter: drop-shadow(0 8px 18px rgba(0,0,0,0.7));
+
+    filter: drop-shadow(
+        0 8px 18px rgba(0,0,0,0.7)
+    );
 }
+
+
+/* EMILIANO STUDIOS */
 
 .studios {
     font-size: 11px;
+
     letter-spacing: 4px;
+
     margin-bottom: 12px;
-    opacity: 0.8;
+
+    color: red;
+
+    opacity: 0.95;
+
+    font-weight: bold;
 }
+
+
+/* TITULO */
 
 .title {
     font-size: clamp(42px, 12vw, 90px);
+
     font-weight: 900;
+
     letter-spacing: 4px;
-    text-shadow: 0 5px 18px rgba(0,0,0,0.8);
+
+    text-shadow:
+        0 5px 18px rgba(0,0,0,0.8);
+
     margin-bottom: 35px;
 }
 
+
+/* BOTÓN */
+
 .menu-button {
     border: none;
+
     padding: 16px 34px;
+
     border-radius: 8px;
+
     background: white;
+
     color: black;
+
     font-size: 17px;
+
     font-weight: bold;
+
     letter-spacing: 1px;
+
     cursor: pointer;
-    box-shadow: 0 7px 20px rgba(0,0,0,0.45);
-    transition: transform 0.2s, background 0.2s;
+
+    box-shadow:
+        0 7px 20px rgba(0,0,0,0.45);
+
+    transition:
+        transform 0.2s,
+        background 0.2s;
 }
 
 .menu-button:hover {
     transform: scale(1.05);
+
     background: #eeeeee;
 }
 
-/* MENÚ */
+
+/* =========================
+   MENÚ
+========================= */
+
 .menu {
     width: min(900px, 92%);
+
     margin: 0 auto;
+
     padding: 80px 0 100px;
 }
 
 .menu-title {
     text-align: center;
+
     font-size: 45px;
+
     font-weight: 900;
+
     margin-bottom: 45px;
-    text-shadow: 0 4px 12px black;
+
+    text-shadow:
+        0 4px 12px black;
 }
 
 .menu-section {
@@ -123,33 +203,56 @@ body {
 
 .section-title {
     font-size: 28px;
+
     text-align: center;
+
     margin-bottom: 20px;
+
     letter-spacing: 2px;
-    text-shadow: 0 3px 10px black;
+
+    text-shadow:
+        0 3px 10px black;
 }
 
 .subsection-title {
     font-size: 18px;
+
     margin: 25px 0 12px;
+
     letter-spacing: 2px;
+
     text-transform: uppercase;
 }
 
+
+/* TARJETAS */
+
 .menu-card {
-    background: rgba(0, 0, 0, 0.62);
-    border: 1px solid rgba(255,255,255,0.15);
+    background:
+        rgba(0, 0, 0, 0.62);
+
+    border:
+        1px solid rgba(255,255,255,0.15);
+
     border-radius: 14px;
+
     padding: 8px 18px;
+
     backdrop-filter: blur(5px);
 }
 
 .menu-item {
     display: flex;
+
     justify-content: space-between;
+
     gap: 15px;
+
     padding: 13px 2px;
-    border-bottom: 1px solid rgba(255,255,255,0.12);
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.12);
+
     font-size: 17px;
 }
 
@@ -163,55 +266,95 @@ body {
 
 .item-price {
     white-space: nowrap;
+
     font-weight: bold;
 }
 
-/* UBICACIONES */
+
+/* =========================
+   UBICACIONES
+========================= */
+
 .location-card {
-    background: rgba(0,0,0,0.65);
-    border: 1px solid rgba(255,255,255,0.15);
+    background:
+        rgba(0,0,0,0.65);
+
+    border:
+        1px solid rgba(255,255,255,0.15);
+
     border-radius: 14px;
+
     padding: 24px;
+
     margin-bottom: 18px;
+
     text-align: center;
+
     backdrop-filter: blur(5px);
 }
 
 .location-name {
     font-size: 22px;
+
     font-weight: 900;
+
     margin-bottom: 10px;
 }
 
 .location-address {
     font-size: 15px;
+
     line-height: 1.6;
+
     opacity: 0.85;
+
     margin-bottom: 18px;
 }
 
 .location-button {
     display: inline-block;
+
     padding: 12px 18px;
+
     background: white;
+
     color: black;
+
     text-decoration: none;
+
     border-radius: 7px;
+
     font-size: 13px;
+
     font-weight: bold;
 }
 
-/* FIRMA */
+
+/* =========================
+   FIRMA
+========================= */
+
 .signature {
     text-align: center;
+
     font-size: 10px;
+
     letter-spacing: 3px;
-    opacity: 0.45;
+
+    color: red;
+
+    opacity: 0.7;
+
     padding: 25px 0;
 }
 
-/* MÓVIL */
+
+/* =========================
+   MÓVIL
+========================= */
+
 @media (max-width: 600px) {
+
     .hero {
         padding: 20px;
     }
@@ -226,6 +369,7 @@ body {
 
     .menu {
         width: 94%;
+
         padding-top: 60px;
     }
 
@@ -240,13 +384,21 @@ body {
     .menu-item {
         font-size: 15px;
     }
+
 }
+
 </style>
+
 </head>
+
 
 <body>
 
-<!-- VIDEO DE FONDO -->
+
+<!-- =========================
+     VIDEO
+========================= -->
+
 <video
     class="background-video"
     autoplay
@@ -255,488 +407,777 @@ body {
     playsinline
     preload="auto"
 >
-    <source src="video.mp4" type="video/mp4">
+    <source
+        src="video.mp4"
+        type="video/mp4"
+    >
 </video>
+
 
 <div class="background-overlay"></div>
 
+
 <div class="content">
 
-    <!-- PORTADA -->
-    <section class="hero">
 
-        <img
-            src="logo.png"
-            alt="Logo de EL TACONAZO"
-            class="logo"
-        >
+<!-- =========================
+     PORTADA
+========================= -->
 
-        <div class="studios">
-            EMILIANO STUDIOS ®
-        </div>
+<section class="hero">
 
-        <h1 class="title">
-            EL TACONAZO
-        </h1>
+    <img
+        src="logo.png"
+        alt="Logo de EL TACONAZO"
+        class="logo"
+    >
 
-        <button
-            class="menu-button"
-            onclick="abrirMenu()"
-        >
-            VER MENÚ
-        </button>
+    <div class="studios">
+        EMILIANO STUDIOS®
+    </div>
 
-    </section>
+    <h1 class="title">
+        EL TACONAZO
+    </h1>
 
+    <button
+        class="menu-button"
+        onclick="abrirMenu()"
+    >
+        VER MENÚ
+    </button>
 
-    <!-- MENÚ -->
-    <main id="menu" class="menu">
+</section>
 
-        <h2 class="menu-title">
-            MENÚ
-        </h2>
 
+<!-- =========================
+     MENÚ
+========================= -->
 
-        <!-- TACOS -->
-        <section class="menu-section">
+<main
+    id="menu"
+    class="menu"
+>
 
-            <h3 class="section-title">
-                TACOS
-            </h3>
 
-            <div class="menu-card">
+<h2 class="menu-title">
+    MENÚ
+</h2>
 
-                <div class="menu-item">
-                    <span>Pastor</span>
-                    <span>$17 maíz / $18 harina</span>
-                </div>
 
-                <div class="menu-item">
-                    <span>Birria</span>
-                    <span>$17 maíz / $18 harina</span>
-                </div>
+<!-- =========================
+     TACOS
+========================= -->
 
-                <div class="menu-item">
-                    <span>Chorizo</span>
-                    <span>$17 maíz / $18 harina</span>
-                </div>
+<section class="menu-section">
 
-                <div class="menu-item">
-                    <span>Bistec</span>
-                    <span>$17 maíz / $18 harina</span>
-                </div>
+<h3 class="section-title">
+    TACOS
+</h3>
 
-                <div class="menu-item">
-                    <span>Tripa</span>
-                    <span>$18 maíz / $19 harina</span>
-                </div>
+<p style="text-align:center; margin-bottom:15px; opacity:.8;">
+    Tortilla de maíz o harina con carne a elegir, acompañada de cebolla, cilantro y salsa.
+</p>
 
-            </div>
-        </section>
+<div class="menu-card">
 
+<div class="menu-item">
+<span class="item-name">Pastor</span>
+<span class="item-price">$17 maíz / $18 harina</span>
+</div>
 
-        <!-- TOSTADAS -->
-        <section class="menu-section">
+<div class="menu-item">
+<span class="item-name">Birria</span>
+<span class="item-price">$17 maíz / $18 harina</span>
+</div>
 
-            <h3 class="section-title">
-                TOSTADAS
-            </h3>
+<div class="menu-item">
+<span class="item-name">Chorizo</span>
+<span class="item-price">$17 maíz / $18 harina</span>
+</div>
 
-            <div class="menu-card">
+<div class="menu-item">
+<span class="item-name">Bistec</span>
+<span class="item-price">$17 maíz / $18 harina</span>
+</div>
 
-                <div class="menu-item"><span>Pastor</span><span>$20</span></div>
-                <div class="menu-item"><span>Birria</span><span>$20</span></div>
-                <div class="menu-item"><span>Chorizo</span><span>$20</span></div>
-                <div class="menu-item"><span>Bistec</span><span>$20</span></div>
-                <div class="menu-item"><span>Tripa</span><span>$22</span></div>
+<div class="menu-item">
+<span class="item-name">Tripa</span>
+<span class="item-price">$18 maíz / $19 harina</span>
+</div>
 
-            </div>
-        </section>
+</div>
 
+</section>
 
-        <!-- VOLCANES -->
-        <section class="menu-section">
 
-            <h3 class="section-title">
-                VOLCANES
-            </h3>
+<!-- =========================
+     TOSTADAS
+========================= -->
 
-            <div class="menu-card">
+<section class="menu-section">
 
-                <div class="menu-item"><span>Pastor</span><span>$22</span></div>
-                <div class="menu-item"><span>Birria</span><span>$22</span></div>
-                <div class="menu-item"><span>Chorizo</span><span>$22</span></div>
-                <div class="menu-item"><span>Bistec</span><span>$22</span></div>
-                <div class="menu-item"><span>Tripa</span><span>$24</span></div>
+<h3 class="section-title">
+    TOSTADAS
+</h3>
 
-            </div>
-        </section>
+<p style="text-align:center; margin-bottom:15px; opacity:.8;">
+    Tostada crujiente con carne a elegir, acompañada de cebolla, cilantro, salsa y sus complementos.
+</p>
 
+<div class="menu-card">
 
-        <!-- MULITAS -->
-        <section class="menu-section">
+<div class="menu-item">
+<span>Pastor</span>
+<span>$20</span>
+</div>
 
-            <h3 class="section-title">
-                MULITAS
-            </h3>
+<div class="menu-item">
+<span>Birria</span>
+<span>$20</span>
+</div>
 
-            <div class="menu-card">
+<div class="menu-item">
+<span>Chorizo</span>
+<span>$20</span>
+</div>
 
-                <div class="menu-item"><span>Pastor</span><span>$24</span></div>
-                <div class="menu-item"><span>Birria</span><span>$24</span></div>
-                <div class="menu-item"><span>Chorizo</span><span>$24</span></div>
-                <div class="menu-item"><span>Bistec</span><span>$24</span></div>
-                <div class="menu-item"><span>Tripa</span><span>$26</span></div>
+<div class="menu-item">
+<span>Bistec</span>
+<span>$20</span>
+</div>
 
-            </div>
-        </section>
+<div class="menu-item">
+<span>Tripa</span>
+<span>$22</span>
+</div>
 
+</div>
 
-        <!-- BURRITOS -->
-        <section class="menu-section">
+</section>
 
-            <h3 class="section-title">
-                BURRITOS
-            </h3>
 
-            <div class="menu-card">
+<!-- =========================
+     VOLCANES
+========================= -->
 
-                <div class="menu-item"><span>Pastor</span><span>$37</span></div>
-                <div class="menu-item"><span>Birria</span><span>$37</span></div>
-                <div class="menu-item"><span>Chorizo</span><span>$37</span></div>
-                <div class="menu-item"><span>Bistec</span><span>$37</span></div>
-                <div class="menu-item"><span>Tripa</span><span>$39</span></div>
+<section class="menu-section">
 
-            </div>
-        </section>
+<h3 class="section-title">
+    VOLCANES
+</h3>
 
+<p style="text-align:center; margin-bottom:15px; opacity:.8;">
+    Tortilla dorada con queso fundido y carne a elegir, acompañada de cebolla, cilantro y salsa.
+</p>
 
-        <!-- EMPALMADAS -->
-        <section class="menu-section">
+<div class="menu-card">
 
-            <h3 class="section-title">
-                EMPALMADAS
-            </h3>
+<div class="menu-item">
+<span>Pastor</span>
+<span>$22</span>
+</div>
 
-            <div class="menu-card">
+<div class="menu-item">
+<span>Birria</span>
+<span>$22</span>
+</div>
 
-                <div class="menu-item"><span>Pastor</span><span>$45</span></div>
-                <div class="menu-item"><span>Birria</span><span>$45</span></div>
-                <div class="menu-item"><span>Chorizo</span><span>$45</span></div>
-                <div class="menu-item"><span>Bistec</span><span>$45</span></div>
-                <div class="menu-item"><span>Tripa</span><span>$47</span></div>
+<div class="menu-item">
+<span>Chorizo</span>
+<span>$22</span>
+</div>
 
-            </div>
-        </section>
+<div class="menu-item">
+<span>Bistec</span>
+<span>$22</span>
+</div>
 
+<div class="menu-item">
+<span>Tripa</span>
+<span>$24</span>
+</div>
 
-        <!-- GRINGAS -->
-        <section class="menu-section">
+</div>
 
-            <h3 class="section-title">
-                GRINGAS
-            </h3>
+</section>
 
-            <div class="menu-card">
 
-                <div class="menu-item"><span>Pastor</span><span>$45</span></div>
-                <div class="menu-item"><span>Birria</span><span>$45</span></div>
-                <div class="menu-item"><span>Chorizo</span><span>$45</span></div>
-                <div class="menu-item"><span>Bistec</span><span>$45</span></div>
-                <div class="menu-item"><span>Tripa</span><span>$47</span></div>
+<!-- =========================
+     MULITAS
+========================= -->
 
-            </div>
-        </section>
+<section class="menu-section">
 
+<h3 class="section-title">
+    MULITAS
+</h3>
 
-        <!-- QUESADILLAS -->
-        <section class="menu-section">
+<p style="text-align:center; margin-bottom:15px; opacity:.8;">
+    Dos tortillas de maíz con queso y carne a elegir, doradas a la plancha y acompañadas de cebolla, cilantro y salsa.
+</p>
 
-            <h3 class="section-title">
-                QUESADILLAS
-            </h3>
+<div class="menu-card">
 
-            <div class="menu-card">
+<div class="menu-item">
+<span>Pastor</span>
+<span>$24</span>
+</div>
 
-                <div class="menu-item"><span>Pastor</span><span>$40</span></div>
-                <div class="menu-item"><span>Birria</span><span>$40</span></div>
-                <div class="menu-item"><span>Chorizo</span><span>$40</span></div>
-                <div class="menu-item"><span>Bistec</span><span>$40</span></div>
-                <div class="menu-item"><span>Tripa</span><span>$45</span></div>
+<div class="menu-item">
+<span>Birria</span>
+<span>$24</span>
+</div>
 
-            </div>
-        </section>
+<div class="menu-item">
+<span>Chorizo</span>
+<span>$24</span>
+</div>
 
+<div class="menu-item">
+<span>Bistec</span>
+<span>$24</span>
+</div>
 
-        <!-- QUESABIRRIA -->
-        <section class="menu-section">
+<div class="menu-item">
+<span>Tripa</span>
+<span>$26</span>
+</div>
 
-            <h3 class="section-title">
-                QUESABIRRIA
-            </h3>
+</div>
 
-            <div class="menu-card">
+</section>
 
-                <div class="menu-item">
-                    <span>Quesabirria</span>
-                    <span>$45</span>
-                </div>
 
-            </div>
-        </section>
+<!-- =========================
+     BURRITOS
+========================= -->
 
+<section class="menu-section">
 
-        <!-- TORTAS -->
-        <section class="menu-section">
+<h3 class="section-title">
+    BURRITOS
+</h3>
 
-            <h3 class="section-title">
-                TORTAS
-            </h3>
+<p style="text-align:center; margin-bottom:15px; opacity:.8;">
+    Burrito de tortilla de harina relleno de carne a elegir, acompañado de queso, frijoles, cebolla, cilantro y salsa.
+</p>
 
-            <div class="menu-card">
+<div class="menu-card">
 
-                <div class="menu-item"><span>Pastor</span><span>$45</span></div>
-                <div class="menu-item"><span>Birria</span><span>$45</span></div>
-                <div class="menu-item"><span>Chorizo</span><span>$45</span></div>
-                <div class="menu-item"><span>Bistec</span><span>$45</span></div>
-                <div class="menu-item"><span>Tripa</span><span>$50</span></div>
+<div class="menu-item">
+<span>Pastor</span>
+<span>$37</span>
+</div>
 
-            </div>
-        </section>
+<div class="menu-item">
+<span>Birria</span>
+<span>$37</span>
+</div>
 
+<div class="menu-item">
+<span>Chorizo</span>
+<span>$37</span>
+</div>
 
-        <!-- BOTANAS -->
-        <section class="menu-section">
+<div class="menu-item">
+<span>Bistec</span>
+<span>$37</span>
+</div>
 
-            <h3 class="section-title">
-                BOTANAS
-            </h3>
+<div class="menu-item">
+<span>Tripa</span>
+<span>$39</span>
+</div>
 
-            <div class="menu-card">
+</div>
 
-                <div class="menu-item">
-                    <span>Patitas de puerco</span>
-                </div>
+</section>
 
-            </div>
-        </section>
 
+<!-- =========================
+     EMPALMADAS
+========================= -->
 
-        <!-- BEBIDAS -->
-        <section class="menu-section">
+<section class="menu-section">
 
-            <h3 class="section-title">
-                BEBIDAS
-            </h3>
+<h3 class="section-title">
+    EMPALMADAS
+</h3>
 
+<p style="text-align:center; margin-bottom:15px; opacity:.8;">
+    Dos tortillas de maíz rellenas de carne y queso, doradas a la plancha y acompañadas con sus complementos.
+</p>
 
-            <h4 class="subsection-title">
-                REFRESCOS
-            </h4>
+<div class="menu-card">
 
-            <div class="menu-card">
+<div class="menu-item">
+<span>Pastor</span>
+<span>$45</span>
+</div>
 
-                <div class="menu-item">
-                    <span>Coca-Cola de vidrio 355 ml</span>
-                    <span>$30</span>
-                </div>
+<div class="menu-item">
+<span>Birria</span>
+<span>$45</span>
+</div>
 
-                <div class="menu-item">
-                    <span>Coca-Cola 600 ml</span>
-                    <span>$35</span>
-                </div>
+<div class="menu-item">
+<span>Chorizo</span>
+<span>$45</span>
+</div>
 
-                <div class="menu-item">
-                    <span>Fresca de vidrio</span>
-                    <span>$30</span>
-                </div>
+<div class="menu-item">
+<span>Bistec</span>
+<span>$45</span>
+</div>
 
-                <div class="menu-item">
-                    <span>Squirt de vidrio</span>
-                    <span>$30</span>
-                </div>
+<div class="menu-item">
+<span>Tripa</span>
+<span>$47</span>
+</div>
 
-                <div class="menu-item">
-                    <span>Mundet de vidrio</span>
-                    <span>$30</span>
-                </div>
+</div>
 
-                <div class="menu-item">
-                    <span>Agua mineral de vidrio</span>
-                    <span>$30</span>
-                </div>
+</section>
 
-                <div class="menu-item">
-                    <span>Topo Chico</span>
-                    <span>$35</span>
-                </div>
 
-            </div>
+<!-- =========================
+     GRINGAS
+========================= -->
 
+<section class="menu-section">
 
-            <h4 class="subsection-title">
-                AGUAS FRESCAS
-            </h4>
+<h3 class="section-title">
+    GRINGAS
+</h3>
 
-            <div class="menu-card">
+<p style="text-align:center; margin-bottom:15px; opacity:.8;">
+    Dos tortillas de harina con queso fundido y carne a elegir, doradas a la plancha y acompañadas de cebolla, cilantro y salsa.
+</p>
 
-                <div class="menu-item">
-                    <span>Agua de Jamaica chica</span>
-                    <span>$20</span>
-                </div>
+<div class="menu-card">
 
-                <div class="menu-item">
-                    <span>Agua de Jamaica mediana</span>
-                    <span>$25</span>
-                </div>
+<div class="menu-item">
+<span>Pastor</span>
+<span>$45</span>
+</div>
 
-                <div class="menu-item">
-                    <span>Agua de Horchata chica</span>
-                    <span>$20</span>
-                </div>
+<div class="menu-item">
+<span>Birria</span>
+<span>$45</span>
+</div>
 
-                <div class="menu-item">
-                    <span>Agua de Horchata mediana</span>
-                    <span>$25</span>
-                </div>
+<div class="menu-item">
+<span>Chorizo</span>
+<span>$45</span>
+</div>
 
-                <div class="menu-item">
-                    <span>Agua de Pepino chica</span>
-                    <span>$20</span>
-                </div>
+<div class="menu-item">
+<span>Bistec</span>
+<span>$45</span>
+</div>
 
-                <div class="menu-item">
-                    <span>Agua de Pepino mediana</span>
-                    <span>$25</span>
-                </div>
+<div class="menu-item">
+<span>Tripa</span>
+<span>$47</span>
+</div>
 
-            </div>
+</div>
 
+</section>
 
-            <div class="menu-card" style="margin-top: 18px;">
 
-                <div class="menu-item">
-                    <span>Agua natural</span>
-                    <span>$15</span>
-                </div>
+<!-- =========================
+     QUESADILLAS
+========================= -->
 
-                <div class="menu-item">
-                    <span>Café</span>
-                    <span>$25</span>
-                </div>
+<section class="menu-section">
 
-                <div class="menu-item">
-                    <span>Cerveza</span>
-                    <span>$35</span>
-                </div>
+<h3 class="section-title">
+    QUESADILLAS
+</h3>
 
-                <div class="menu-item">
-                    <span>Victoria</span>
-                    <span>$35</span>
-                </div>
+<p style="text-align:center; margin-bottom:15px; opacity:.8;">
+    Tortilla de maíz o harina rellena de queso fundido y carne a elegir, acompañada de cebolla, cilantro y salsa.
+</p>
 
-                <div class="menu-item">
-                    <span>Corona 0.0</span>
-                    <span>$35</span>
-                </div>
+<div class="menu-card">
 
-            </div>
+<div class="menu-item">
+<span>Pastor</span>
+<span>$40</span>
+</div>
 
-        </section>
+<div class="menu-item">
+<span>Birria</span>
+<span>$40</span>
+</div>
 
+<div class="menu-item">
+<span>Chorizo</span>
+<span>$40</span>
+</div>
 
-        <!-- UBICACIONES -->
-        <section class="menu-section">
+<div class="menu-item">
+<span>Bistec</span>
+<span>$40</span>
+</div>
 
-            <h3 class="section-title">
-                UBICACIONES
-            </h3>
+<div class="menu-item">
+<span>Tripa</span>
+<span>$45</span>
+</div>
 
+</div>
 
-            <!-- ORIGINAL: ARRIBA -->
-            <div class="location-card">
+</section>
 
-                <div class="location-name">
-                    EL TACONAZO
-                </div>
 
-                <div class="location-address">
-                    Av. Lic. A. Rivera<br>
-                    Centro, Zacapu, Michoacán
-                </div>
+<!-- =========================
+     QUESABIRRIA
+========================= -->
 
-                <a
-                    class="location-button"
-                    href="https://maps.app.goo.gl/hEZSJpky56ph8rsp9?g_st=aw"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    VER EN GOOGLE MAPS
-                </a>
+<section class="menu-section">
 
-            </div>
+<h3 class="section-title">
+    QUESABIRRIA
+</h3>
 
+<p style="text-align:center; margin-bottom:15px; opacity:.8;">
+    Quesabirria con carne de birria y queso fundido, acompañada de consomé, cebolla, cilantro y salsa.
+</p>
 
-            <!-- TOMBERO: ABAJO -->
-            <div class="location-card">
+<div class="menu-card">
 
-                <div class="location-name">
-                    EL TACONAZO EL TOMBERO
-                </div>
+<div class="menu-item">
+<span>Quesabirria</span>
+<span>$45</span>
+</div>
 
-                <div class="location-address">
-                    Avenida Universidad 1546<br>
-                    Zacapu, Michoacán
-                </div>
+</div>
 
-                <a
-                    class="location-button"
-                    href="https://maps.app.goo.gl/pWUJ2czwhgTtT3EN6?g_st=aw"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    VER EN GOOGLE MAPS
-                </a>
+</section>
 
-            </div>
 
-        </section>
+<!-- =========================
+     TORTAS
+========================= -->
 
+<section class="menu-section">
 
-        <div class="signature">
-            EMILIANO STUDIOS®
-        </div>
+<h3 class="section-title">
+    TORTAS
+</h3>
 
-    </main>
+<p style="text-align:center; margin-bottom:15px; opacity:.8;">
+    Torta de pan suave rellena de carne a elegir, acompañada de cebolla, cilantro, salsa y sus complementos.
+</p>
+
+<div class="menu-card">
+
+<div class="menu-item">
+<span>Pastor</span>
+<span>$45</span>
+</div>
+
+<div class="menu-item">
+<span>Birria</span>
+<span>$45</span>
+</div>
+
+<div class="menu-item">
+<span>Chorizo</span>
+<span>$45</span>
+</div>
+
+<div class="menu-item">
+<span>Bistec</span>
+<span>$45</span>
+</div>
+
+<div class="menu-item">
+<span>Tripa</span>
+<span>$50</span>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     BOTANAS
+========================= -->
+
+<section class="menu-section">
+
+<h3 class="section-title">
+    BOTANAS
+</h3>
+
+<div class="menu-card">
+
+<div class="menu-item">
+<span>Patitas de puerco</span>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     BEBIDAS
+========================= -->
+
+<section class="menu-section">
+
+<h3 class="section-title">
+    BEBIDAS
+</h3>
+
+
+<h4 class="subsection-title">
+    REFRESCOS
+</h4>
+
+<div class="menu-card">
+
+<div class="menu-item">
+<span>Coca-Cola de vidrio 355 ml</span>
+<span>$30</span>
+</div>
+
+<div class="menu-item">
+<span>Coca-Cola 600 ml</span>
+<span>$35</span>
+</div>
+
+<div class="menu-item">
+<span>Fresca de vidrio</span>
+<span>$30</span>
+</div>
+
+<div class="menu-item">
+<span>Squirt de vidrio</span>
+<span>$30</span>
+</div>
+
+<div class="menu-item">
+<span>Mundet de vidrio</span>
+<span>$30</span>
+</div>
+
+<div class="menu-item">
+<span>Agua mineral de vidrio</span>
+<span>$30</span>
+</div>
+
+<div class="menu-item">
+<span>Topo Chico</span>
+<span>$35</span>
+</div>
 
 </div>
 
 
-<!-- AUDIO -->
-<audio id="menuAudio" preload="auto">
-    <source src="audio.mp3" type="audio/mpeg">
+<h4 class="subsection-title">
+    AGUAS FRESCAS
+</h4>
+
+<div class="menu-card">
+
+<div class="menu-item">
+<span>Agua de Jamaica chica</span>
+<span>$20</span>
+</div>
+
+<div class="menu-item">
+<span>Agua de Jamaica mediana</span>
+<span>$25</span>
+</div>
+
+<div class="menu-item">
+<span>Agua de Horchata chica</span>
+<span>$20</span>
+</div>
+
+<div class="menu-item">
+<span>Agua de Horchata mediana</span>
+<span>$25</span>
+</div>
+
+<div class="menu-item">
+<span>Agua de Pepino chica</span>
+<span>$20</span>
+</div>
+
+<div class="menu-item">
+<span>Agua de Pepino mediana</span>
+<span>$25</span>
+</div>
+
+</div>
+
+
+<div class="menu-card" style="margin-top:20px;">
+
+<div class="menu-item">
+<span>Agua natural</span>
+<span>$15</span>
+</div>
+
+<div class="menu-item">
+<span>Café</span>
+<span>$25</span>
+</div>
+
+<div class="menu-item">
+<span>Cerveza</span>
+<span>$35</span>
+</div>
+
+<div class="menu-item">
+<span>Victoria</span>
+<span>$35</span>
+</div>
+
+<div class="menu-item">
+<span>Corona 0.0</span>
+<span>$35</span>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     UBICACIONES
+========================= -->
+
+<section class="menu-section">
+
+<h3 class="section-title">
+    UBICACIONES
+</h3>
+
+
+<!-- TOMBERO -->
+
+<div class="location-card">
+
+<div class="location-name">
+    EL TACONAZO EL TOMBERO
+</div>
+
+<div class="location-address">
+    Avenida Universidad 1546<br>
+    Zacapu, Michoacán
+</div>
+
+<a
+    class="location-button"
+    href="https://maps.app.goo.gl/pWUJ2czwhgTtT3EN6?g_st=aw"
+    target="_blank"
+    rel="noopener"
+>
+    VER EN GOOGLE MAPS
+</a>
+
+</div>
+
+
+<!-- ORIGINAL -->
+
+<div class="location-card">
+
+<div class="location-name">
+    EL TACONAZO (ORIGINAL)
+</div>
+
+<div class="location-address">
+    Av. Lic. A. Rivera<br>
+    Centro, Zacapu, Michoacán
+</div>
+
+<a
+    class="location-button"
+    href="https://maps.app.goo.gl/hEZSJpky56ph8rsp9?g_st=aw"
+    target="_blank"
+    rel="noopener"
+>
+    VER EN GOOGLE MAPS
+</a>
+
+</div>
+
+</section>
+
+
+<!-- FIRMA FINAL -->
+
+<div class="signature">
+    EMILIANO STUDIOS®
+</div>
+
+
+</main>
+
+</div>
+
+
+<!-- =========================
+     AUDIO
+========================= -->
+
+<audio
+    id="menuAudio"
+    preload="auto"
+>
+    <source
+        src="audio.mp3"
+        type="audio/mpeg"
+    >
 </audio>
 
 
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
 <script>
+
 function abrirMenu() {
 
-    const audio = document.getElementById("audio.mp3");
+    const audio =
+        document.getElementById("menuAudio");
 
     audio.loop = true;
+
     audio.currentTime = 0;
 
-    // El audio comienza únicamente después de pulsar VER MENÚ
     audio.play().catch(function(error) {
-        console.log("No se pudo reproducir el audio:", error);
+
+        console.log(
+            "No se pudo reproducir el audio:",
+            error
+        );
+
     });
 
-    document.getElementById("menu").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
+
+    document
+        .getElementById("menu")
+        .scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
 }
+
 </script>
 
+
 </body>
-                    </html>
+    </html>
