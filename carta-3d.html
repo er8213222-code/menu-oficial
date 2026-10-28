@@ -16,7 +16,7 @@
 @media(max-width:560px){#sheetWrap{height:51dvh;top:52%}.panel{padding:9px;font-size:10px}.item{padding:2px 0}#controls{bottom:10px;gap:5px}#controls button{padding:10px 8px;font-size:11px}#hands .hand{height:45px}.forearm{height:65px}}
 </style></head><body>
 <div id="intro"><div class="introBox"><div class="kicker">UNA EXPERIENCIA INTERACTIVA</div><h1 class="brand">EL TACONAZO</h1><p class="sub">LA CARTA DIGITAL</p><button id="play">JUGAR</button><p class="note">Entra, toma asiento y descubre el menú.</p></div></div><div id="fade"></div>
-<div id="hud"><div id="status">Tripa solo sábados y domingos</div><div id="sheetWrap" class="closed"><div id="sheet"><div id="front"><div class="panel left" id="p1"></div><div class="panel right" id="p2"></div></div><div id="reverse"><div class="panel left" id="p3"></div><div class="panel right" id="p4"></div></div></div><div id="hands"><div class="hand"><div class="forearm"></div><div class="palm"></div><div class="finger a"></div><div class="finger b"></div><div class="finger c"></div></div><div class="hand"><div class="forearm"></div><div class="palm"></div><div class="finger a"></div><div class="finger b"></div><div class="finger c"></div></div></div></div><div id="controls"><button id="previous">CERRAR</button><button id="turn">VOLTEAR HOJA</button><button id="soundBtn">SONIDO</button></div><div id="soundBox"><div id="audioInfo">Para escuchar música, selecciona un archivo de audio.</div><label>Elegir canción <input type="file" id="audioFile" accept="audio/*"></label></div></div>
+<div id="hud"><div id="status">Tripa solo sábados y domingos</div><div id="sheetWrap" class="closed"><div id="sheet"><div id="front"><div class="panel left" id="p1"></div><div class="panel right" id="p2"></div></div><div id="reverse"><div class="panel left" id="p3"></div><div class="panel right" id="p4"></div></div></div></div><div id="controls"><button id="previous">CERRAR</button><button id="turn">VOLTEAR HOJA</button><button id="soundBtn">SONIDO</button></div><div id="soundBox"><div id="audioInfo">Para escuchar música, selecciona un archivo de audio.</div><label>Elegir canción <input type="file" id="audioFile" accept="audio/*"></label></div></div>
 <audio id="audio" src="audio.mp3" loop preload="none"></audio>
 <script type="module">
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js';
@@ -32,6 +32,20 @@ function chair(x,z,rot=0){const group=new THREE.Group();const metal=new THREE.Me
 function table(x,z,color){block(x,.8,z,1.9,.09,1.15,color);for(const xx of [-.72,.72])for(const zz of [-.43,.43])block(x+xx,.4,z+zz,.065,.78,.065,0x202022)}
 table(1.85,-2.9,0xa82c25);chair(1.2,-2.25);chair(2.3,-2.25);table(-1.65,-3.5,0xa72e25);chair(-1.2,-2.85);table(0,1.15,0x18191b);chair(0,2.15,Math.PI);
 block(0,2.9,-5.75,2.6,.35,.08,0x131415);
+// Manos tridimensionales unidas a la cámara, con dedos y pulgar.
+const handRig=new THREE.Group();camera.add(handRig);scene.add(camera);
+const skinMat=new THREE.MeshStandardMaterial({color:0xd49b71,roughness:.85});
+const shirtMat=new THREE.MeshStandardMaterial({color:0x284b76,roughness:.9});
+function hand3D(side){
+ const root=new THREE.Group();root.position.set(side*.58,-.48,-1.05);handRig.add(root);
+ const sleeve=new THREE.Mesh(new THREE.CylinderGeometry(.105,.13,.35,10),shirtMat);sleeve.position.set(side*.08,-.28,.17);sleeve.rotation.x=-.65;root.add(sleeve);
+ const arm=new THREE.Mesh(new THREE.CylinderGeometry(.08,.105,.34,10),skinMat);arm.position.set(side*.04,-.08,.05);arm.rotation.x=-.65;root.add(arm);
+ const palm=new THREE.Mesh(new THREE.BoxGeometry(.22,.17,.13),skinMat);palm.position.set(0,.13,-.07);root.add(palm);
+ for(let i=0;i<4;i++){const finger=new THREE.Mesh(new THREE.CapsuleGeometry(.027,.13,4,8),skinMat);finger.position.set((i-1.5)*.05,.28,-.09);finger.rotation.x=-.18;root.add(finger)}
+ const thumb=new THREE.Mesh(new THREE.CapsuleGeometry(.038,.08,4,8),skinMat);thumb.position.set(-side*.145,.12,-.1);thumb.rotation.z=side*.75;root.add(thumb);
+ return root;
+}
+const handL=hand3D(-1),handR=hand3D(1);
 const audio=document.querySelector('#audio');const soundBox=document.querySelector('#soundBox');document.querySelector('#audioFile').onchange=e=>{const f=e.target.files[0];if(f){audio.src=URL.createObjectURL(f);audio.play().then(()=>soundBox.style.display='none').catch(()=>{})}};
 document.querySelector('#soundBtn').onclick=()=>{soundBox.style.display=soundBox.style.display==='block'?'none':'block';if(audio.src&&!audio.paused)audio.pause();else audio.play().catch(()=>{})};
 const meat=['Pastor','Birria','Chorizo','Bistec','Tripa'];function rows(title,prices){return '<h3>'+title+'</h3>'+meat.map((m,i)=>'<div class="item"><span>'+m+'</span><span>'+prices[i]+'</span></div>').join('')}
@@ -41,12 +55,12 @@ document.querySelector('#p2').innerHTML='<h2>ESPECIALIDADES</h2>'+rows('EMPALMAD
 document.querySelector('#p3').innerHTML='<h2>MÁS ANTOJITOS</h2>'+rows('TOSTADAS',['$20','$20','$20','$20','$22'])+rows('VOLCANES',['$22','$22','$22','$22','$24'])+rows('MULITAS',['$24','$24','$24','$24','$26']);
 document.querySelector('#p4').innerHTML='<h2>BEBIDAS Y MÁS</h2>'+rows('BURRITOS',['$37','$37','$37','$37','$39'])+simple('QUESABIRRIA',[['Con consomé','$45']])+simple('REFRESCOS',[['Coca-Cola vidrio 355 ml','$30'],['Coca-Cola 600 ml','$35'],['Fresca vidrio','$30'],['Squirt vidrio','$30'],['Mundet vidrio','$30'],['Agua mineral vidrio','$30'],['Topo Chico','$35']])+simple('AGUAS FRESCAS',[['Jamaica chica','$20'],['Jamaica mediana','$25'],['Horchata chica','$20'],['Horchata mediana','$25']])+simple('BOTANAS',[['Patitas de puerco','Consultar']]);
 const day=new Date().getDay();if(day===0||day===6)document.querySelector('#status').textContent='HOY SÍ HAY TRIPA · sujeto a existencias';
-const fade=document.querySelector('#fade'),intro=document.querySelector('#intro'),hud=document.querySelector('#hud'),wrap=document.querySelector('#sheetWrap'),sheet=document.querySelector('#sheet');let stage='intro',start=0;
+const fade=document.querySelector('#fade'),intro=document.querySelector('#intro'),hud=document.querySelector('#hud'),wrap=document.querySelector('#sheetWrap'),sheet=document.querySelector('#sheet');let stage='intro',start=0,handActionUntil=0;
 camera.position.set(0,1.65,4.9);camera.lookAt(0,1.5,-4);
 document.querySelector('#play').onclick=()=>{intro.style.opacity='0';setTimeout(()=>intro.style.display='none',800);stage='dark';fade.style.opacity='1';audio.play().catch(()=>{document.querySelector('#audioInfo').textContent='No hay audio.mp3 disponible. Puedes elegir tu canción desde el teléfono.';soundBox.style.display='block'});setTimeout(()=>{stage='walking';start=performance.now();fade.style.opacity='0'},850)};
-function openMenu(){stage='menu';hud.style.display='block';wrap.style.opacity='1';setTimeout(()=>wrap.classList.remove('closed'),350)}
-document.querySelector('#turn').onclick=()=>{wrap.classList.remove('closed');sheet.classList.toggle('flip');document.querySelector('#turn').textContent=sheet.classList.contains('flip')?'VER FRENTE':'VOLTEAR HOJA'};
-document.querySelector('#previous').onclick=()=>{sheet.classList.remove('flip');wrap.classList.toggle('closed');document.querySelector('#turn').textContent='VOLTEAR HOJA'};
-function frame(){requestAnimationFrame(frame);if(stage==='walking'){const t=Math.min(1,(performance.now()-start)/4200),smooth=t*t*(3-2*t);camera.position.set(0,1.65-.45*smooth,4.9-2.4*smooth);camera.lookAt(0,1.2,-1.5);if(t>=1){fade.style.opacity='1';stage='sitting';setTimeout(()=>{camera.position.set(0,1.35,2.35);camera.lookAt(0,.85,1.05);fade.style.opacity='0';setTimeout(openMenu,550)},750)}}renderer.render(scene,camera)}frame();
+function openMenu(){stage='menu';handActionUntil=performance.now()+950;hud.style.display='block';wrap.style.opacity='1';setTimeout(()=>wrap.classList.remove('closed'),350)}
+document.querySelector('#turn').onclick=()=>{handActionUntil=performance.now()+1000;wrap.classList.remove('closed');sheet.classList.toggle('flip');document.querySelector('#turn').textContent=sheet.classList.contains('flip')?'VER FRENTE':'VOLTEAR HOJA'};
+document.querySelector('#previous').onclick=()=>{handActionUntil=performance.now()+1000;sheet.classList.remove('flip');wrap.classList.toggle('closed');document.querySelector('#turn').textContent='VOLTEAR HOJA'};
+function frame(){requestAnimationFrame(frame);if(stage==='walking'){const t=Math.min(1,(performance.now()-start)/4200),smooth=t*t*(3-2*t);camera.position.set(0,1.65-.45*smooth,4.9-2.4*smooth);camera.lookAt(0,1.2,-1.5);if(t>=1){fade.style.opacity='1';stage='sitting';setTimeout(()=>{camera.position.set(0,1.35,2.35);camera.lookAt(0,.85,1.05);fade.style.opacity='0';setTimeout(openMenu,550)},750)}const action=Math.max(0,(handActionUntil-performance.now())/1000);handR.rotation.z=action?Math.sin(performance.now()*.014)*.27:0;handL.rotation.z=action?-.13:0;handRig.visible=stage==='menu';}renderer.render(scene,camera)}frame();
 addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
 </script></body></html>
