@@ -30,7 +30,7 @@ for(let y of [1.25,2.2]){block(3.9,y,-2, .06,.15,7,0x171717);block(3.86,y-.19,-2
 block(0,2,-5.88,3.2,3.2,.11,0x181a1c);for(let x of [-1.6,0,1.6])block(x,2,-5.78,.045,3.25,.1,0x292929);
 function chair(x,z,rot=0){const group=new THREE.Group();const metal=new THREE.MeshStandardMaterial({color:0x19191b});const yellow=new THREE.MeshStandardMaterial({color:0xe3b827});const red=new THREE.MeshStandardMaterial({color:0x9b3128});function piece(w,h,d,px,py,pz,mat){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.set(px,py,pz);group.add(m)}piece(.7,.09,.6,0,.52,0,yellow);piece(.73,.08,.08,0,1.12,.3,metal);piece(.72,.08,.08,0,.94,.3,metal);for(let xx of [-.32,.32]){piece(.05,1.1,.05,xx,.55,.28,metal);piece(.05,.52,.05,xx,.26,-.26,metal)}group.position.set(x,0,z);group.rotation.y=rot;scene.add(group)}
 function table(x,z,color){block(x,.8,z,1.9,.09,1.15,color);for(const xx of [-.72,.72])for(const zz of [-.43,.43])block(x+xx,.4,z+zz,.065,.78,.065,0x202022)}
-table(1.85,-2.9,0xa82c25);chair(1.2,-2.25);chair(2.3,-2.25);table(-1.65,-3.5,0xa72e25);chair(-1.2,-2.85);table(0,1.15,0x18191b);chair(0,2.15,Math.PI);
+table(1.85,-2.9,0xa82c25);chair(1.2,-2.25);chair(2.3,-2.25);table(-1.65,-3.5,0xa72e25);chair(-1.2,-2.85);table(0,1.15,0x18191b);chair(0,2.15,0);
 block(0,2.9,-5.75,2.6,.35,.08,0x131415);
 // Manos tridimensionales unidas a la cámara, con dedos y pulgar.
 const handRig=new THREE.Group();camera.add(handRig);scene.add(camera);
@@ -59,13 +59,27 @@ extBox(0,2.5,8.4,5.8,.13,2.5,0x15191c);
 for(const x of [-2.7,2.7])extBox(x,1.27,8.3,.12,2.55,.12,0x151719);
 extBox(-2.3,1.25,8.45,2.2,2.2,.12,0x202529);
 extBox(2.3,1.25,8.45,2.2,2.2,.12,0x202529);
+// Carrito metálico negro adelante, restaurante con entrada visible detrás a la derecha.
+const metalBlack=0x25292c;
+extBox(-1.45,1.18,10.3,3.8,1.6,.95,metalBlack);
+extBox(-1.45,2.24,10.3,4.1,.12,1.3,0x16191c);
+for(const x of [-3.2,.3])extBox(x,1.5,10.3,.09,2.85,.09,0x222528);
+extBox(-1.45,2.94,10.3,4.35,.13,1.65,0x1d2022);
+for(const x of [-2.75,-.25]){const wheel=new THREE.Mesh(new THREE.TorusGeometry(.32,.095,8,16),new THREE.MeshStandardMaterial({color:0x121212}));wheel.position.set(x,.35,10.85);facade.add(wheel)}
+// Entrada del restaurante a la derecha del carrito, con franjas rojas y amarillas.
+extBox(2.65,1.25,7.35,2.5,2.5,.15,0xe7dfd3);
+extBox(2.65,.7,7.47,2.5,1.1,.08,0xb92b23);
+extBox(2.65,1.31,7.5,2.5,.13,.09,0xf5d42a);
+extBox(2.65,1.48,7.5,2.5,.1,.09,0x141414);
+extBox(2.65,1.1,7.63,1.25,2.15,.1,0x38251c);
+extBox(2.65,2.13,7.69,.9,.48,.08,0x233948);
 const signCanvas=document.createElement('canvas');signCanvas.width=1024;signCanvas.height=160;
 const sc=signCanvas.getContext('2d');sc.fillStyle='#161819';sc.fillRect(0,0,1024,160);sc.fillStyle='#f5ce26';sc.font='bold 77px Georgia';sc.textAlign='center';sc.fillText('EL TACONAZO',512,100);
 const signTex=new THREE.CanvasTexture(signCanvas);
 const sign=new THREE.Mesh(new THREE.PlaneGeometry(5.5,.85),new THREE.MeshBasicMaterial({map:signTex}));sign.position.set(0,3.48,7.48);facade.add(sign);
 const bone=new THREE.MeshStandardMaterial({color:0xece5d5,roughness:.75});
 function bonePart(parent,x,y,z,w,h,d){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),bone);m.position.set(x,y,z);parent.add(m);return m}
-const skull=new THREE.Group();skull.position.set(0,4.35,8.5);facade.add(skull);
+const skull=new THREE.Group();skull.position.set(-1.45,3.55,10.25);facade.add(skull);
 const head=new THREE.Mesh(new THREE.SphereGeometry(.3,16,12),bone);head.scale.set(1,.92,.75);skull.add(head);
 bonePart(skull,0,-.26,.04,.35,.17,.19);
 for(const x of [-.12,.12]){const eye=new THREE.Mesh(new THREE.SphereGeometry(.095,12,8),new THREE.MeshBasicMaterial({color:0x101010}));eye.position.set(x,.04,.225);skull.add(eye)}
@@ -75,7 +89,7 @@ const waveArm=new THREE.Group();waveArm.position.set(.38,-.39,0);skull.add(waveA
 bonePart(waveArm,.27,.1,0,.5,.07,.08);bonePart(waveArm,.54,.35,0,.07,.53,.08);
 for(let i=0;i<4;i++)bonePart(waveArm,.47+i*.07,.67,0,.04,.18,.04);
 const leftBone=bonePart(skull,-.6,-.34,0,.56,.07,.08);leftBone.rotation.z=-.3;
-const facadeLight=new THREE.PointLight(0xffffff,90,12);facadeLight.position.set(0,3.4,10);facade.add(facadeLight);
+const facadeLight=new THREE.PointLight(0xffffff,90,12);facadeLight.position.set(-1,3.6,12);facade.add(facadeLight);
 // Objetos pequeños: saleros, servilletero con servilletas, recipientes de salsa y cucharas.
 const silver=new THREE.MeshStandardMaterial({color:0xbac2c4,metalness:.7,roughness:.3});
 function cylinder(x,y,z,r,h,mat){const m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,h,16),mat);m.position.set(x,y,z);scene.add(m);return m}
@@ -96,15 +110,15 @@ document.querySelector('#p3').innerHTML='<h2>MÁS ANTOJITOS</h2>'+rows('TOSTADAS
 document.querySelector('#p4').innerHTML='<h2>BEBIDAS Y MÁS</h2>'+rows('BURRITOS',['$37','$37','$37','$37','$39'])+simple('QUESABIRRIA',[['Con consomé','$45']])+simple('REFRESCOS',[['Coca-Cola vidrio 355 ml','$30'],['Coca-Cola 600 ml','$35'],['Fresca vidrio','$30'],['Squirt vidrio','$30'],['Mundet vidrio','$30'],['Agua mineral vidrio','$30'],['Topo Chico','$35']])+simple('AGUAS FRESCAS',[['Jamaica chica','$20'],['Jamaica mediana','$25'],['Horchata chica','$20'],['Horchata mediana','$25']])+simple('BOTANAS',[['Patitas de puerco','Consultar']]);
 const day=new Date().getDay();if(day===0||day===6)document.querySelector('#status').textContent='HOY SÍ HAY TRIPA · sujeto a existencias';
 const fade=document.querySelector('#fade'),intro=document.querySelector('#intro'),hud=document.querySelector('#hud'),wrap=document.querySelector('#sheetWrap'),sheet=document.querySelector('#sheet');let stage='intro',start=0,handActionUntil=0;
-camera.position.set(0,1.75,13.8);camera.lookAt(0,2.8,7.4);
+camera.position.set(0,2.05,15.9);camera.lookAt(0,2.05,7.6);
 document.querySelector('#play').onclick=()=>{intro.style.opacity='0';setTimeout(()=>intro.style.display='none',800);stage='exterior';start=performance.now();audio.play().catch(()=>{document.querySelector('#audioInfo').textContent='Puedes seleccionar la música desde tu teléfono.'})};
 function openMenu(){stage='menu';handActionUntil=performance.now()+950;hud.style.display='block';wrap.style.opacity='1';setTimeout(()=>wrap.classList.remove('closed'),350)}
 document.querySelector('#turn').onclick=()=>{handActionUntil=performance.now()+1000;wrap.classList.remove('closed');sheet.classList.toggle('flip');document.querySelector('#turn').textContent=sheet.classList.contains('flip')?'VER FRENTE':'VOLTEAR HOJA'};
 document.querySelector('#previous').onclick=()=>{handActionUntil=performance.now()+1000;sheet.classList.remove('flip');wrap.classList.toggle('closed');document.querySelector('#turn').textContent='VOLTEAR HOJA'};
 function frame(){requestAnimationFrame(frame);const now=performance.now();
 if(stage==='exterior'){waveArm.rotation.z=Math.sin(now*.007)*.4;skull.rotation.y=Math.sin(now*.001)*.08;
-const t=Math.min(1,(now-start)/3500);camera.position.set(0,1.75,13.8-1.2*t);camera.lookAt(0,2.8,7.4);if(t>=1){stage='dark';fade.style.opacity='1';setTimeout(()=>{facade.visible=false;camera.position.set(0,1.65,4.9);camera.lookAt(0,1.4,-4);stage='walking';start=performance.now();fade.style.opacity='0'},800)}}
-if(stage==='walking'){const t=Math.min(1,(now-start)/3500),ease=t*t*(3-2*t);camera.position.set(0,1.65-.25*ease,4.9-2.55*ease);camera.lookAt(0,1.2,-1.5);if(t>=1){stage='sitting';fade.style.opacity='1';setTimeout(()=>{camera.position.set(0,1.35,2.35);camera.lookAt(0,.85,1.05);fade.style.opacity='0';setTimeout(openMenu,500)},700)}}
+const t=Math.min(1,(now-start)/3500);if(t>=1){stage='dark';fade.style.opacity='1';setTimeout(()=>{facade.visible=false;camera.position.set(0,1.65,4.9);camera.lookAt(0,1.4,-4);stage='walking';start=performance.now();fade.style.opacity='0'},800)}}
+if(stage==='walking'){const t=Math.min(1,(now-start)/3500),ease=t*t*(3-2*t);camera.position.set(0,1.65-.25*ease,4.9-2.55*ease);camera.lookAt(0,1.2,-1.5);if(t>=1){stage='sitting';fade.style.opacity='1';setTimeout(()=>{camera.position.set(0,1.62,2.38);camera.lookAt(0,.79,1.08);fade.style.opacity='0';setTimeout(openMenu,500)},700)}}
 const action=Math.max(0,(handActionUntil-now)/1000);handR.rotation.z=action?Math.sin(now*.014)*.27:0;handL.rotation.z=action?-.13:0;handRig.visible=stage==='menu';
 renderer.render(scene,camera)}frame();
 addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
